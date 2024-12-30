@@ -16,6 +16,7 @@ const App = () => {
     )();
   }, [api]);
 
+  console.log("s")
 
   return (
     <div className="">
