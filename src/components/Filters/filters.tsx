@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Filters = () => {
   return (
-    <div className='bg-slate-300 flex grid'>filters</div>
-  )
-}
+    <div className="col-span-3">
+      <h2>Filter</h2>
+    </div>
+  );
+};
 
-export default Filters
+export default Filters;

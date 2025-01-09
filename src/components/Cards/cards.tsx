@@ -1,6 +1,6 @@
 import React from "react";
 import { clx } from "../../utils/clx";
-interface Character {
+export interface Character {
   id: number;
   name: string;
   image: string;
