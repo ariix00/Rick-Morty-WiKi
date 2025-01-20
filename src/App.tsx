@@ -13,6 +13,7 @@ const App = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [fetchedData, updateFetchedData] = useState<DataApi>();
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
 
   let info = {} as Record<string, any>;
   let results = [] as Character[];
@@ -21,7 +22,7 @@ const App = () => {
   }
   console.log(info);
   console.log(results);
-  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
+  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&gender=${filter}`;
 
   useEffect(() => {
     (async function () {
@@ -43,7 +44,7 @@ const App = () => {
 
         <Filters />
 
-        <div className="grid grid-cols-12 col-span-7 gap-4">
+        <div className="grid grid-cols-12 col-span-7 gap-4 p-5">
           <Cards results={results} />
         </div>
         <div className="col-span-1"></div>
