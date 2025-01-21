@@ -1,13 +1,11 @@
 import React from "react";
 import FilterBTN from "./FilterBTN";
 
-interface BTNattributes {
-  id: string;
-  name: string;
-  for: string;
-  type: string;
+interface genderProps {
+  setGender: React.Dispatch<React.SetStateAction<string>>;
+  setPagenumber: React.Dispatch<React.SetStateAction<number>>;
 }
-const Gender = () => {
+const Gender = ({ setPagenumber, setGender }: genderProps) => {
   const genders = ["male", "female", "genderless", "unknown"]; //only exists two
 
   return (
@@ -20,6 +18,8 @@ const Gender = () => {
           {genders.map((gender) => {
             return (
               <FilterBTN
+                task={setGender}
+                setPagenumber={setPagenumber}
                 key={gender}
                 id={gender + "gender"}
                 name="radiogender"

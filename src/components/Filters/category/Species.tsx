@@ -1,12 +1,11 @@
 import React from "react";
 import FilterBTN from "./FilterBTN";
-interface BTNattributes {
-  id: string;
-  name: string;
-  type: string;
-  for: string;
+
+interface speciesProps {
+  setSpecies: React.Dispatch<React.SetStateAction<string>>;
+  setPagenumber: React.Dispatch<React.SetStateAction<number>>;
 }
-const Species = () => {
+const Species = ({ setPagenumber, setSpecies }: speciesProps) => {
   const species = [
     "Human",
     "Alien",
@@ -31,6 +30,8 @@ const Species = () => {
           {species.map((specie) => {
             return (
               <FilterBTN
+                task={setSpecies}
+                setPagenumber={setPagenumber}
                 key={specie}
                 id={specie}
                 name="radiospecies"

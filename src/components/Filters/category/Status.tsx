@@ -1,7 +1,11 @@
 import React from "react";
 import FilterBTN from "./FilterBTN";
+interface statusProps {
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+  setPagenumber: React.Dispatch<React.SetStateAction<number>>;
+}
 
-const Status = () => {
+const Status = ({ setStatus, setPagenumber }: statusProps) => {
   const status = ["alive", "dead", "unknown"];
 
   return (
@@ -14,6 +18,8 @@ const Status = () => {
           {status.map((statu) => {
             return (
               <FilterBTN
+                task={setStatus}
+                setPagenumber={setPagenumber}
                 key={statu}
                 id={statu + "status"}
                 name="radiostatus"
