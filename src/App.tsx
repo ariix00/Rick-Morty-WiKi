@@ -7,12 +7,14 @@ import Location from "./pages/location";
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Navbar />
+      <div className="App ">
+        <header>
+          <Navbar />
+        </header>
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/episode" element={<Episodes />} />
+        <Route path="/episodes" element={<Episodes />} />
         <Route path="/location" element={<Location />} />
       </Routes>
     </Router>

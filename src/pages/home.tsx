@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar/navbar";
 import Search from "../components/Search/search";
 import Filters from "../components/Filters/filters";
 import { Cards, Character } from "../components/Cards/cards";
@@ -22,9 +21,11 @@ const Home = () => {
 
   let info = {} as Record<string, any>;
   let results = [] as Character[];
+
   if (fetchedData) {
     ({ info, results } = fetchedData);
   }
+
   console.log(info);
   console.log(results);
   const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
@@ -39,11 +40,6 @@ const Home = () => {
 
   return (
     <div className="">
-      <h1 className="text-center text-6xl p-5">
-        Rick & Morty <span className="text-blue-600">WiKi</span>{" "}
-      </h1>
-
-      <Navbar />
       <Search setsearch={setSearch} />
       <div className="grid grid-cols-12">
         <div className="col-span-1"></div>

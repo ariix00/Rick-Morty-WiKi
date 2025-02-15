@@ -24,7 +24,7 @@ export const Cards = ({ results }: CardProps) => {
           key={id}
           className="col-span-4 relative border-2 border-slate-950 rounded-3xl overflow-hidden"
         >
-          <div>
+          <div className="bg-indigo-500 shadow-lg shadow-indigo-500/50">
             <div className="mb-2">
               <img src={image} alt="" className="w-full" />
             </div>
