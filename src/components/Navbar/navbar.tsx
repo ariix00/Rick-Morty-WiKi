@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between gap-5 items-center px-10 relative overflow-hidden">
       <Link to="/" className="text-center text-6xl p-1">
-        <img src="/public/title.png" alt="" className="min-w-96 max-w-96" />
+        <img src="/title.png" alt="" className="min-w-96 max-w-96" />
       </Link>
 
       <div className="flex justify-around text-center gap-5 max-[800px]:flex-col items-center">
@@ -22,7 +22,7 @@ const Navbar = () => {
           className="max-[800px]:flex hidden bg-lime-300 hover:brightness-75 active:brightness-50 rounded-xl p-2 duration-200"
           onClick={setActiveTrue}
         >
-          <img src="src/assets/menu.png" alt="" className="min-w-10 w-10" />
+          <img src="/menu.png" alt="" className="min-w-10 w-10" />
         </button>
         <NavLink
           to="/characters"
