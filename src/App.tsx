@@ -7,7 +7,7 @@ import Landing from "./pages/landing";
 function App() {
   return (
     <Router>
-      <div className="relative overflow-hidden flex w-screen h-screen flex-col bg-[url('src/assets/fondo.webp')] bg-cover bg-no-repeat bg-fixed max-h-screen overflow-x-hidden overflow-y-auto custom-scrollbar">
+      <div className="relative overflow-hidden flex w-screen h-screen flex-col bg-[url('/public/fondo.webp')] bg-cover bg-no-repeat bg-fixed max-h-screen overflow-x-hidden overflow-y-auto custom-scrollbar">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/characters" element={<Characters />} />
