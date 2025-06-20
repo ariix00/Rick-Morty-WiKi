@@ -13,14 +13,14 @@ const Pagination = ({ info, pagenumber, setPagenumber }: PaginationProps) => {
     <ReactPaginate
       pageCount={info.pages}
       forcePage={pagenumber === 1 ? 0 : pagenumber - 1}
-      className="flex justify-center gap-4"
-      previousClassName="bg-blue-500 rounded text-slate-50 p-1"
-      nextClassName="bg-blue-500 rounded text-slate-50 p-1"
-      pageClassName="bg-slate-50 rounded text-blue-500 p-1"
+      className="flex justify-center gap-4 max-md:gap-2 text-xl max-md:text-sm select-none"
+      previousClassName="bg-lime-400 rounded text-black p-1 hover:bg-lime-600 duration-300"
+      nextClassName="px-2 bg-lime-400 rounded text-black p-1 hover:bg-lime-600 duration-300"
+      pageClassName="px-2 bg-black/40  border-2 border-lime-300 rounded text-slate-50 p-1 hover:bg-lime-500 duration-300 px-3"
       onPageChange={(data) => {
         setPagenumber(data.selected + 1);
       }}
-      activeClassName="!bg-blue-500 rounded text-slate-50 p-1"
+      activeClassName="!bg-lime-400 rounded text-black p-1"
     />
   );
 };

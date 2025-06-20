@@ -1,74 +1,54 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useState } from "react";
+import Search from "../components/Search/search";
+import Filters from "../components/Filters/filters";
 import { Cards, Character } from "../components/Cards/cards";
-import LocationsList from "../components/LocationList/LocationsList";
+import Pagination from "../components/Pagination/pagination";
 import Navbar from "../components/Navbar/navbar";
 import { clx } from "../utils/clx";
+
 interface DataApi {
-  id: number;
-  name: string;
-  type: string;
-  dimension: string;
-  residents: Character[];
-  url: string;
-  created: string;
+  info: Record<string, any>;
+  results: Character[];
 }
-interface PageData {
-  count: number;
-  pages: number;
-  next: string;
-  prev: string;
-}
-const Location = () => {
-  const [id, setID] = useState(1);
 
-  const [info, setInfo] = useState<DataApi>();
-  const [allInfo, setAllInfo] = useState<DataApi[]>([]);
-  const [pageInfo, setPageInfo] = useState<PageData>();
+const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
+  const [fetchedData, updateFetchedData] = useState<DataApi>();
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
+  const [gender, setGender] = useState("");
+  const [species, setSpecies] = useState("");
 
-  const [results, setResults] = useState<Character[]>([]);
+  let info = {} as Record<string, any>;
+  let results = [] as Character[];
 
-  // let { air_date, name } = info;
-  let type = "";
-  let name = "";
-  let dimension = "";
-
-  if (info) {
-    ({ type, name, dimension } = info);
+  if (fetchedData) {
+    ({ info, results } = fetchedData);
   }
-  // if (allInfo) {
-  //   ({ name } = allInfo);
-  // }
 
-  const api = `https://rickandmortyapi.com/api/location/${id}`;
-  const allApiData = `https://rickandmortyapi.com/api/location/?page=${pageNumber}`;
+  console.log(info);
+  console.log(results);
+  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
+
   useEffect(() => {
     (async function () {
-      const data = await fetch(api);
-      const response = await data.json();
-      setInfo(response);
-
-      const allData = await fetch(allApiData);
-      const allResponse = await allData.json();
-      setAllInfo(allResponse.results);
-      setPageInfo(allResponse.info);
-
-      const a = await Promise.all(
-        response.residents.map(async (x: string) => {
-          const charData = await fetch(x);
-          const charRes = await charData.json();
-          return charRes;
-        })
-      );
-      setResults(a);
+      try {
+        const data = await fetch(api);
+        const response = await data.json();
+        updateFetchedData(response);
+      } catch (error) {
+        console.error("error fetching data:", error);
+      }
     })();
-  }, [api, allApiData]);
+  }, [api]);
   const [openModal, setOpenModal] = useState(false);
   const [characterData, setCharacterData] = useState<Character>();
   return (
-    <div className="flex flex-col w-full mt-2 overflow-x-hidden relative">
+    <div className="flex flex-col overflow-hidden relative w-full">
       {openModal ? (
-        <div className="w-1/2 h-1/2 fixed top-1/2 transform -translate-x-1/2 -translate-y-1/2 left-1/2 z-50 flex bg-black/80 backdrop-blur-2xl shadow-lg shadow-lime-500/20 rounded-3xl p-2 text-slate-50 hover:shadow-lime-500/80 hover:bg-black/60 duration-300">
+        <div className="w-1/2 h-1/2 fixed top-1/2 transform -translate-x-1/2 -translate-y-1/2 left-1/2 z-50 flex bg-black/80 backdrop-blur-2xl shadow-lg shadow-lime-500/20 rounded-3xl p-2 text-slate-50 hover:shadow-lime-500/80 hover:bg-black/60 hover:scale-110 duration-300">
           <button
             onClick={() => {
               setOpenModal(false);
@@ -128,36 +108,21 @@ const Location = () => {
       <header>
         <Navbar />
       </header>
-      <div className="mb-4 mt-10">
-        <h1 className="text-center text-7xl max-lg:text-5xl text-slate-50 font-bold">
-          Location: {""}
-          <span className="text-lime-300">
-            {" "}
-            {name == "" ? "unknown" : name}
-          </span>
-        </h1>
-        <h5 className="text-center text-3xl text-slate-300 m-2">
-          Type: {type == "" ? "unknown" : type}
-        </h5>
-        <h5 className="text-center text-3xl text-slate-300 m-2">
-          {dimension == "" ? "unknown" : dimension}
-        </h5>
-      </div>
-      <div className="flex mx-5 max-xl:flex-col overflow-x-hidden mt-10">
-        <div className="">
+      <Search setsearch={setSearch} />
+
+      <div className="flex mx-5 max-xl:flex-col ">
+        <div className="flex-col items-center">
           <h1 className="text-center text-3xl text-lime-300 font-bold">
-            List of Locations :
+            Filter by:
           </h1>
-          <LocationsList
-            info={allInfo}
-            setID={setID}
-            setPageNumber={setPageNumber}
-            pageInfo={pageInfo}
-            pageNumber={pageNumber}
+          <Filters
+            setSpecies={setSpecies}
+            setGender={setGender}
+            setStatus={setStatus}
+            setPagenumber={setPageNumber}
           />
         </div>
-
-        <div className=" flex flex-grow custom-scrollbar overflow-y-scroll flex-wrap justify-start max-h-[800px] gap-5 p-4drop-shadow-2xl rounded-2xl backdrop-blur-sm mt-10">
+        <div className="flex custom-scrollbar overflow-y-auto flex-wrap justify-center max-h-[800px] gap-5 p-4 min-md:mx-10 drop-shadow-2xl rounded-2xl backdrop-blur-sm">
           <Cards
             results={results}
             setCharacterData={setCharacterData}
@@ -165,8 +130,16 @@ const Location = () => {
           />
         </div>
       </div>
+
+      <div className="fixed bottom-0 w-full p-4 bg-black/80 backdrop-blur-sm box-border">
+        <Pagination
+          info={info}
+          setPagenumber={setPageNumber}
+          pagenumber={pageNumber}
+        />
+      </div>
     </div>
   );
 };
 
-export default Location;
+export default Home;

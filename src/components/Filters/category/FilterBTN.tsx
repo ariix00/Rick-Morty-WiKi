@@ -15,12 +15,12 @@ const FilterBTN = ({
   task,
 }: BTNprops) => {
   return (
-    <div className="p-2">
+    <div className="p-4">
       <input
         type="radio"
         name={name}
         id={id}
-        className="hidden peer "
+        className="hidden peer"
         onClick={() => {
           setPagenumber(1);
           task(type);
@@ -28,7 +28,7 @@ const FilterBTN = ({
       />
       <label
         htmlFor={fordasd}
-        className="border-2 w-10 h-2 p-2 rounded-md peer-checked:bg-blue-500 peer-checked:text-slate-50 select-none cursor-pointer"
+        className="w-full p-2 border-2 hover:border-4 border-lime-300/50 text-xl shadow-inner hover:shadow-lime-300 hover:bg-black hover:text-lime-300 hover:border-lime-300 duration-300 cursor-pointer rounded-2xl peer-checked:bg-lime-300 peer-checked:text-black select-none active:brightness-50"
       >
         {type}
       </label>

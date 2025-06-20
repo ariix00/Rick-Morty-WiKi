@@ -1,4 +1,3 @@
-import React from "react";
 import { clx } from "../../utils/clx";
 export interface Character {
   id: number;
@@ -6,53 +5,74 @@ export interface Character {
   image: string;
   location: Record<string, string>;
   status: string;
+  gender: string;
+  species: string;
+  origin: Record<string, string>;
+  type: string;
 }
 
 interface CardProps {
   results: Character[];
+  setCharacterData: (character: Character) => void;
+  setOpenModal: (x: boolean) => void;
 }
 
-export const Cards = ({ results }: CardProps) => {
-  let display;
+export const Cards = ({
+  results,
+  setCharacterData,
+  setOpenModal,
+}: CardProps) => {
   console.log(results);
 
-  if (results) {
-    display = results.map((x) => {
-      const { id, name, image, status, location } = x;
-      return (
-        <div
-          key={id}
-          className="col-span-4 relative border-2 border-slate-950 rounded-3xl overflow-hidden"
-        >
-          <div className="bg-indigo-500 shadow-lg shadow-indigo-500/50">
-            <div className="mb-2">
-              <img src={image} alt="" className="w-full" />
-            </div>
-            <div className="p-3 flex flex-col justify-between">
-              <div className="text-xl mb-4 font-bold">{name}</div>
+  const handleModal = (character: Character) => {
+    setOpenModal(true);
+    setCharacterData(character);
+  };
 
-              <div>
-                <div className="text-base font-light">Last Location</div>
-                <div className="text-xl">{location.name}</div>
+  return (
+    <>
+      {results.map((x) => {
+        const { id, name, image, status, location } = x;
+        return (
+          <>
+            <div
+              onClick={() => {
+                handleModal(x);
+              }}
+              key={id}
+              className="max-md:flex-grow hover:scale-105 transition-all duration-300 border-2 border-slate-950 rounded-3xlcursor-pointer max-lg::w-1/3 min-[768px]::max-w-72"
+            >
+              <div className="max-md:flex bg-lime-300/5 backdrop-blur-2xl shadow-lg shadow-lime-500/20 rounded-3xl p-2 text-slate-50 hover:shadow-lime-500/80 hover:bg-lime-300/10 duration-300 h-full ">
+                <div className="mb-2">
+                  <img src={image} alt="" className="w-full rounded-3xl" />
+                </div>
+                <div>
+                  <div
+                    className={clx(
+                      "rounded-md p-1 text-xl text-white border-4 w-fit",
+                      status == "Alive" ? "border-green-500" : "",
+                      status == "Dead" ? "border-red-500" : "",
+                      status == "unknown" ? "border-gray-400" : ""
+                    )}
+                  >
+                    {status}
+                  </div>
+                  <div className="p-3 flex flex-col justify-between">
+                    <div className="text-3xl mb-4 font-bold text-wrap break-words max-w-72">
+                      {name}
+                    </div>
+
+                    <div>
+                      <div className="text-xl font-light">Location:</div>
+                      <div className="text-xl text-wrap">{location.name}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div
-            className={clx(
-              "absolute top-1 right-1 rounded-md p-1 text-white",
-              status == "Alive" ? "bg-green-500" : "",
-              status == "Dead" ? "bg-red-500" : "",
-              status == "unknown" ? "bg-gray-400" : ""
-            )}
-          >
-            {status}
-          </div>
-        </div>
-      );
-    });
-  } else {
-    display = "No characters Found :/";
-  }
-  return <>{display}</>;
+          </>
+        );
+      })}
+    </>
+  );
 };

@@ -20,29 +20,27 @@ const Species = ({ setPagenumber, setSpecies }: speciesProps) => {
     "Planet",
   ];
   return (
-    <div className="border-2 box-content hover:bg-slate-100 duration-150">
-      <details className="">
-        <summary className="cursor-pointer select-none font-semibold text-xl p-2">
-          Species
-        </summary>
+    <details className="hover:border-lime-300 border-2 border-lime-300/50 min-w-56 bg-lime-300/10 backdrop-blur-xl rounded-lg">
+      <summary className="cursor-pointer select-none font-semibold text-xl p-2 w-full">
+        Species
+      </summary>
 
-        <div className="box-content border-2 h-fit p-2 flex flex-wrap">
-          {species.map((specie) => {
-            return (
-              <FilterBTN
-                task={setSpecies}
-                setPagenumber={setPagenumber}
-                key={specie}
-                id={specie}
-                name="radiospecies"
-                type={specie}
-                fordasd={specie}
-              />
-            );
-          })}
-        </div>
-      </details>
-    </div>
+      <div className="border-2 h-fit p-2 flex flex-wrap border-lime-300/50">
+        {species.map((specie) => {
+          return (
+            <FilterBTN
+              task={setSpecies}
+              setPagenumber={setPagenumber}
+              key={specie}
+              id={specie}
+              name="radiospecies"
+              type={specie}
+              fordasd={specie}
+            />
+          );
+        })}
+      </div>
+    </details>
   );
 };
 

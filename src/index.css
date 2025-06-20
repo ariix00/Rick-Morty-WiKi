@@ -20,3 +20,21 @@
     font-family: "Lato", serif;
   }
 }
+
+/* Dentro de tu archivo CSS global (por ejemplo, index.css) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-slate-600 /* Color de fondo de la pista */;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-lime-300; /* Color del pulgar (la parte que se arrastra) */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-lime-600;
+}
