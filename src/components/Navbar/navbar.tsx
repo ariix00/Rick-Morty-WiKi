@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between gap-5 items-center px-10 relative overflow-hidden">
       <Link to="/" className="text-center text-6xl p-1">
-        <img src="src/assets/title.png" alt="" className="min-w-96 max-w-96" />
+        <img src="/public/title.png" alt="" className="min-w-96 max-w-96" />
       </Link>
 
       <div className="flex justify-around text-center gap-5 max-[800px]:flex-col items-center">

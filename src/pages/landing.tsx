@@ -14,11 +14,7 @@ const landing = () => {
           </button>
         </div>
 
-        <img
-          src="src/assets/landing.png"
-          alt=""
-          className="w-1/3 h-fit mt-10"
-        />
+        <img src="/public/landing.png" alt="" className="w-1/3 h-fit mt-10" />
       </div>
     </div>
   );
