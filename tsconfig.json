@@ -1,11 +1,7 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
-   
- "compilerOptions": {
+  "references": [],
+
+  "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
@@ -20,10 +16,8 @@
 
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noEmit": true  // <--- importante mantener esto
+    "noEmit": true // <--- importante mantener esto
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
-
-
 }
