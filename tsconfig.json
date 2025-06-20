@@ -4,7 +4,7 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-   {
+   
   "compilerOptions": {
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -21,6 +21,6 @@
     "noUnusedParameters": false
   },
   "include": ["src"]
-}
+
 
 }
